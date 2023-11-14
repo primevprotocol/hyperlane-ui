@@ -10,7 +10,7 @@ export const chains: ChainMap<ChainMetadata & { mailbox?: Address }> = {
     chainId: 17864,
     rpcUrls: [
       {
-        http: 'http://localhost:8545',
+        http: 'http://34.215.163.180:8545',
       },
     ],
   },

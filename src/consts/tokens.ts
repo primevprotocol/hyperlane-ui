@@ -8,7 +8,7 @@ export const tokenList: WarpTokenConfig = [
     symbol: "ETH",
     decimals: 18,
     type: "native",
-    hypNativeAddress: "0xB6916dBC3cffDC5057660734Dc798dc0efa3A11f",
+    hypNativeAddress: "0xd1cC3B6b71C298589d7Cd388eFcD57b0101d228B",
     logoURI: '/logos/weth.png',
   },
 ];
