@@ -12,6 +12,8 @@ This app is built with Next+React, Wagmi, RainbowKit, and the Hyperlane SDK.
 
 ## Customization
 
+You'll need to set NEXT_PUBLIC_WALLET_CONNECT_ID to a valid projectId from walletconnect.
+
 See [CUSTOMIZE.md](./CUSTOMIZE.md) for details about adjusting the tokens and branding of this app.
 
 ## Development

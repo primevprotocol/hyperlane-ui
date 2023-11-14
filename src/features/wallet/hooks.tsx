@@ -1,5 +1,5 @@
 import { DeliverTxResponse, ExecuteResult } from '@cosmjs/cosmwasm-stargate';
-import { useChain as useCosmosChain, useChains as useCosmosChains } from '@cosmos-kit/react';
+import { useChains as useCosmosChains } from '@cosmos-kit/react';
 import { useConnectModal as useEvmModal } from '@rainbow-me/rainbowkit';
 import { useConnection, useWallet as useSolanaWallet } from '@solana/wallet-adapter-react';
 import { useWalletModal as useSolanaModal } from '@solana/wallet-adapter-react-ui';
@@ -19,7 +19,6 @@ import {
 
 import { ProtocolType, sleep } from '@hyperlane-xyz/utils';
 
-import { PLACEHOLDER_COSMOS_CHAIN } from '../../consts/values';
 import { logger } from '../../utils/logger';
 import {
   getCaip2Id,
@@ -161,16 +160,16 @@ export function useConnectFns(): Record<ProtocolType, () => void> {
   const onConnectSolana = useCallback(() => setSolanaModalVisible(true), [setSolanaModalVisible]);
 
   // Cosmos
-  const { openView: onConnectCosmos } = useCosmosChain(PLACEHOLDER_COSMOS_CHAIN);
+  // const { openView: onConnectCosmos } = useCosmosChain(PLACEHOLDER_COSMOS_CHAIN);
 
   return useMemo(
     () => ({
       [ProtocolType.Ethereum]: onConnectEthereum,
       [ProtocolType.Sealevel]: onConnectSolana,
-      [ProtocolType.Cosmos]: onConnectCosmos,
+      // [ProtocolType.Cosmos]: onConnectCosmos,
       [ProtocolType.Fuel]: () => alert('TODO'),
     }),
-    [onConnectEthereum, onConnectSolana, onConnectCosmos],
+    [onConnectEthereum, onConnectSolana],
   );
 }
 
@@ -182,8 +181,8 @@ export function useDisconnectFns(): Record<ProtocolType, () => Promise<void>> {
   const { disconnect: disconnectSol } = useSolanaWallet();
 
   // Cosmos
-  const { disconnect: disconnectCosmos, address: addressCosmos } =
-    useCosmosChain(PLACEHOLDER_COSMOS_CHAIN);
+  // const { disconnect: disconnectCosmos, address: addressCosmos } =
+    // useCosmosChain(PLACEHOLDER_COSMOS_CHAIN);
 
   const onClickDisconnect =
     (env: ProtocolType, disconnectFn?: () => Promise<void> | void) => async () => {
@@ -200,14 +199,14 @@ export function useDisconnectFns(): Record<ProtocolType, () => Promise<void>> {
     () => ({
       [ProtocolType.Ethereum]: onClickDisconnect(ProtocolType.Ethereum, disconnectEvm),
       [ProtocolType.Sealevel]: onClickDisconnect(ProtocolType.Sealevel, disconnectSol),
-      [ProtocolType.Cosmos]: onClickDisconnect(ProtocolType.Cosmos, async () => {
-        if (addressCosmos) await disconnectCosmos();
-      }),
+      // [ProtocolType.Cosmos]: onClickDisconnect(ProtocolType.Cosmos, async () => {
+      //   // if (addressCosmos) await disconnectCosmos();
+      // }),
       [ProtocolType.Fuel]: onClickDisconnect(ProtocolType.Fuel, () => {
         'TODO';
       }),
     }),
-    [disconnectEvm, disconnectSol, disconnectCosmos, addressCosmos],
+    [disconnectEvm, disconnectSol],
   );
 }
 
