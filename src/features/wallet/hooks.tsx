@@ -166,7 +166,7 @@ export function useConnectFns(): Record<ProtocolType, () => void> {
     () => ({
       [ProtocolType.Ethereum]: onConnectEthereum,
       [ProtocolType.Sealevel]: onConnectSolana,
-      // [ProtocolType.Cosmos]: onConnectCosmos,
+      [ProtocolType.Cosmos]: () => alert('TODO'),
       [ProtocolType.Fuel]: () => alert('TODO'),
     }),
     [onConnectEthereum, onConnectSolana],
@@ -199,9 +199,9 @@ export function useDisconnectFns(): Record<ProtocolType, () => Promise<void>> {
     () => ({
       [ProtocolType.Ethereum]: onClickDisconnect(ProtocolType.Ethereum, disconnectEvm),
       [ProtocolType.Sealevel]: onClickDisconnect(ProtocolType.Sealevel, disconnectSol),
-      // [ProtocolType.Cosmos]: onClickDisconnect(ProtocolType.Cosmos, async () => {
-      //   // if (addressCosmos) await disconnectCosmos();
-      // }),
+      [ProtocolType.Cosmos]: onClickDisconnect(ProtocolType.Cosmos, async () => {
+        // if (addressCosmos) await disconnectCosmos();
+      }),
       [ProtocolType.Fuel]: onClickDisconnect(ProtocolType.Fuel, () => {
         'TODO';
       }),
