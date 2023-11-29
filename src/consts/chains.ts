@@ -1,6 +1,13 @@
 import { ChainMap, ChainMetadata } from '@hyperlane-xyz/sdk';
 import { ProtocolType } from '@hyperlane-xyz/utils';
 
+export const etherToken = { name: 'Ether', symbol: 'ETH', decimals: 18 };
+export enum ExplorerFamily {
+  Etherscan = 'etherscan',
+  Blockscout = 'blockscout',
+  Other = 'other',
+}
+
 // A map of chain names to ChainMetadata
 export const chains: ChainMap<ChainMetadata & { mailbox?: Address }> = {
   // ----------- Your chains here -----------------
@@ -10,9 +17,38 @@ export const chains: ChainMap<ChainMetadata & { mailbox?: Address }> = {
     chainId: 17864,
     rpcUrls: [
       {
-        http: 'http://34.215.163.180:8545',
-        webSocket: 'ws://34.215.163.180:8546',
+        http: 'http://localhost:8545',
+        webSocket: 'ws://localhost:8546',
       },
     ],
+  },
+  // Needed to define this with custom url to make frontend work
+  sepolia: {
+    chainId: 11155111,
+    domainId: 11155111,
+    name: 'sepolia',
+    protocol: ProtocolType.Ethereum,
+    displayName: 'Sepolia',
+    nativeToken: etherToken,
+    rpcUrls: [
+      { 
+        http: `https://eth-sepolia.g.alchemy.com/v2/a0wg_g1X-Wz4IeVA-0SS3PsQhbyQNjc_`,
+        webSocket: `wss://eth-sepolia.g.alchemy.com/v2/a0wg_g1X-Wz4IeVA-0SS3PsQhbyQNjc_`,
+      },
+    ],
+    blockExplorers: [
+      {
+        name: 'Etherscan',
+        url: 'https://sepolia.etherscan.io',
+        apiUrl: 'https://api-sepolia.etherscan.io/api',
+        family: ExplorerFamily.Etherscan,
+      },
+    ],
+    blocks: {
+      confirmations: 1,
+      reorgPeriod: 2,
+      estimateBlockTime: 13,
+    },
+    isTestnet: true,
   },
 };
