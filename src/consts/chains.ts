@@ -31,9 +31,11 @@ export const chains: ChainMap<ChainMetadata & { mailbox?: Address }> = {
     displayName: 'Sepolia',
     nativeToken: etherToken,
     rpcUrls: [
+      {
+        http: `https://ethereum-sepolia.publicnode.com`,
+      },
       { 
-        http: `https://eth-sepolia.g.alchemy.com/v2/a0wg_g1X-Wz4IeVA-0SS3PsQhbyQNjc_`,
-        webSocket: `wss://eth-sepolia.g.alchemy.com/v2/a0wg_g1X-Wz4IeVA-0SS3PsQhbyQNjc_`,
+        http: `https://1rpc.io/sepolia`,
       },
     ],
     blockExplorers: [
